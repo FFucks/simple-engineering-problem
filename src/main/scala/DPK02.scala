@@ -3,7 +3,7 @@
 
 object DPK02 {
 
-    def revert[A](list: List[A]): List[A] = {
+    def revertList[A](list: List[A]): List[A] = {
         var result = List.empty[A]
 
         for (element <- list) {

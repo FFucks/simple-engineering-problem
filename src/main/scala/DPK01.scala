@@ -4,7 +4,7 @@
 
 object DPK01 {
 
-    def revert(str: String): String = {
+    def revertString(str: String): String = {
         var result = ""
 
         for (s <- str) {
@@ -12,5 +12,8 @@ object DPK01 {
         }
         result
     }
+
+    @main def run(): Unit =
+        println(revertString("Hello"))
 
 }
