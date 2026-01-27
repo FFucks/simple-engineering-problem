@@ -3,7 +3,7 @@
 
 object DPK02 extends App {
 
-    println(revertList(List(1, 2, 3, 4)))
+    println(revertList[Int](List(1, 2, 3, 4)))
 
     def revertList[A](list: List[A]): List[A] = {
         var result = List.empty[A]
