@@ -23,7 +23,7 @@ object DPK04 extends App{
     println(pattern_matcher("Argentina"))
 
 
-    def pattern_matcher(country: String): String = {
+    private def pattern_matcher(country: String): String = {
         country.toLowerCase() match {
             case "usa"     => "English"
             case "brazil"  => "Portuguese"
