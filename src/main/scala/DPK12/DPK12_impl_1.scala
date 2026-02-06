@@ -17,17 +17,20 @@ object DPK12_impl_1 extends App {
 
     private def bubble_sort(list: Seq[Int]) : List[Int] = {
         val array = list.toArray
+        var iterableList = 0
 
-        for (iterableList <- 0 until array.length - 1 ) {
-            val arrayRange = array.length - iterableList - 1
-
-            for (positionCompare <- 0 until arrayRange) {
+        while (iterableList < array.length - 1) {
+            var positionCompare = 0
+            while (positionCompare < (array.length - iterableList - 1)) {
                 if (array(positionCompare) > array(positionCompare + 1)) {
                     val aux = array(positionCompare)
                     array(positionCompare) = array(positionCompare + 1)
                     array(positionCompare + 1) = aux
                 }
+                positionCompare += 1
             }
+
+            iterableList += 1
         }
         array.toList
     }

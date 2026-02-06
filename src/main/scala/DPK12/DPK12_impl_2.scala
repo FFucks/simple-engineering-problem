@@ -15,21 +15,20 @@ object DPK12_impl_2 extends App {
     println(bubble_sort(arr))
     println(bubble_sort(list))
 
-    private def bubble_sort(list: Seq[Int]): List[Int] = {
-
+    private def bubble_sort(list: Seq[Int]) : List[Int] = {
         val array = list.toArray
 
-        for (iterableList <- 1 until array.length) {
-            for (positionCompare <- iterableList to 1 by -1) {
-                if (array(positionCompare) < array(positionCompare - 1)) {
+        for (iterableList <- 0 until array.length - 1 ) {
+            val arrayRange = array.length - iterableList - 1
+
+            for (positionCompare <- 0 until arrayRange) {
+                if (array(positionCompare) > array(positionCompare + 1)) {
                     val aux = array(positionCompare)
-                    array(positionCompare) = array(positionCompare - 1)
-                    array(positionCompare - 1) = aux
+                    array(positionCompare) = array(positionCompare + 1)
+                    array(positionCompare + 1) = aux
                 }
             }
         }
-
         array.toList
     }
-
 }
