@@ -9,7 +9,7 @@ The map function should recive a collection(list or array) and a function that w
 Now refactor the code and do not use any prebuild function.*/
 
 
-object DPK08 extends App{
+object DPK08_impl_1 extends App{
 
     println(map(List(1, 2, 3, 4, 5), (x => x * 2)))
     println(mapPerformance(List(1, 2, 3, 4, 5), (x => x - 1)))

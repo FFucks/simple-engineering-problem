@@ -8,7 +8,7 @@ tokenize("Hello World How Are You", " ") -> ["Hello", "World", "How", "Are", "Yo
 tokenize("Hello-World-How-Are-You", "-") -> ["Hello", "World", "How", "Are", "You"]
 Can you refactor your code and do that without using any prebuild function like split?*/
 
-object DPK06 extends App {
+object DPK06_impl_1 extends App {
 
     println(tokenize("Hello,World,How,Are,You", ","))
     println(tokenize("Hello World How Are You", " "))

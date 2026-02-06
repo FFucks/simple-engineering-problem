@@ -16,7 +16,7 @@ Refactor the code, can you do that without using IF statements?
 
 pattern_matcher("Usa") -> "English"*/
 
-object DPK04 extends App{
+object DPK04_impl_1 extends App{
 
     println(pattern_matcher("Usa"))
     println(pattern_matcher("brazil"))

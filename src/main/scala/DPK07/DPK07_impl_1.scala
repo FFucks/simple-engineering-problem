@@ -11,7 +11,7 @@ group_by(["a","b","c","d","e","f","g","h","i","j"], 3) -> [["a","b","c"], ["d","
 Can you refactor the code and create your own group by function, do not use any prebuild function.*/
 
 
-object DPK07 extends App {
+object DPK07_impl_1 extends App {
 
 
     println(group_by[Int](List(1,2,3,4,5,6,7,8,9,10), 3))

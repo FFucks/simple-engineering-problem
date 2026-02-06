@@ -10,7 +10,7 @@ Now refactor the code and do not use any prebuild function.*/
 
 
 
-object DPK09 extends App {
+object DPK09_impl_1 extends App {
 
     println(filter[Int](List(1,2,3,4,5,6,7,8,9,10), (x => x % 2 == 0)))
     println(filter[Int](List(1,2,3,4,5,6,7,8,9,10), (x => x % 2 > 0)))
