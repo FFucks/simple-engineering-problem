@@ -1,3 +1,5 @@
+package DPK04
+
 /*DPK04 Simple Pattern Matcher
     Given the following countries and languages:
 

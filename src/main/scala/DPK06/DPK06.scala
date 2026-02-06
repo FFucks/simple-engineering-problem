@@ -1,3 +1,5 @@
+package DPK06
+
 /*DPK06 Tokenizer
     Create a function that can tokenize a string based on a token.
 

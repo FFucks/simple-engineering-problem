@@ -1,3 +1,5 @@
+package DPK08
+
 /*DPK08 Map
  Create a function that can map a function execution to each element of a list, return a new list.
 
