@@ -4,7 +4,9 @@ package DPK01
 //Create a function that can revert a string.
 
 
-object DPK01 {
+object DPK01_impl_1 extends App {
+
+    println(revertString("Hello"))
 
     def revertString(str: String): String = {
         var result = ""
@@ -14,8 +16,5 @@ object DPK01 {
         }
         result
     }
-
-    @main def run(): Unit =
-        println(revertString("Hello"))
 
 }
