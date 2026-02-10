@@ -30,6 +30,7 @@ src/DPK01_impl_7.js
 src/DPK01_impl_8.js
 src/DPK01_impl_9.js
 src/DPK01_impl_10.js
+
 But all files might have the same code?
 sure - if that is the case no problem, what matter is to pratice.
 however you might find better ways of doing it - if you dont - is also fine.
@@ -39,8 +40,7 @@ Explain the problem.
 Explain the solution line by line of the code.
 Share the parts that was hard to understand - ask for advice.
 Ask for refactoring tips - how could we make the code better.
-Ask for feedback
-Problems
+Ask for feedback Problems
 DPK01 Revert String
 Create a function that can revert a string.
 
