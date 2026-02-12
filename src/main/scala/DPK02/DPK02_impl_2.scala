@@ -16,6 +16,7 @@ object DPK02_impl_2 extends App {
         for (index <- (list.length - 1) to 0 by -1 ) {
             result = result :+ list(index)
         }
+        
         result
     }
 
