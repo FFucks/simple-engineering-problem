@@ -8,30 +8,32 @@ tokenize("Hello World How Are You", " ") -> ["Hello", "World", "How", "Are", "Yo
 tokenize("Hello-World-How-Are-You", "-") -> ["Hello", "World", "How", "Are", "You"]
 Can you refactor your code and do that without using any prebuild function like split?*/
 
-class DPK06_impl_1 {
+import scala.collection.mutable.ListBuffer
 
+class DPK06_impl_3 {
     def tokenize(text: String, token: String): List[String] = {
+
         val delimiter = token.charAt(0)
-        var result = List.empty[String]
-        var currentText = ""
+        val result = ListBuffer[String]()
+        var current = ""
 
         for (char <- text) {
             if (char == delimiter) {
-                result = result :+ currentText
-                currentText = ""
+                result += current
+                current = ""
             } else {
-                currentText += char
+                current += char
             }
         }
 
-        result :+ currentText
+        result += current
+        result.toList
     }
-
 }
 
-@main def Dpk06Impl1(): Unit = {
+@main def Dpk06Impl3(): Unit = {
 
-    val dpk06 = new DPK06_impl_1
+    val dpk06 = new DPK06_impl_3
 
     println(dpk06.tokenize("Hello,World,How,Are,You", ","))
     println(dpk06.tokenize("Hello World How Are You", " "))
