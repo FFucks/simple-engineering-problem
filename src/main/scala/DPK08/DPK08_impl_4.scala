@@ -8,24 +8,24 @@ The map function should recive a collection(list or array) and a function that w
 
 Now refactor the code and do not use any prebuild function.*/
 
-
-class DPK08_impl_1 {
+class DPK08_impl_4 {
 
     def map[A, B](list: List[A], func: A => B): List[B] = {
+        var current = list
         var result = List.empty[B]
 
-        for (element <- list) {
-            val mappedElement = func.apply(element)
-            result = result :+ mappedElement
+        while (current.nonEmpty) {
+            result = func(current.head) :: result
+            current = current.tail
         }
 
-        result
+        result.reverse
     }
 }
 
-@main def dpk08Impl1(): Unit = {
+@main def dpk08Impl4(): Unit = {
 
-    val dpk08 = new DPK08_impl_1
+    val dpk08 = new DPK08_impl_4
 
     println(dpk08.map(List(1, 2, 3, 4, 5), (x => x * 2)))
     println(dpk08.map(List(1, 2, 3, 4, 5), (x => x - 1)))
