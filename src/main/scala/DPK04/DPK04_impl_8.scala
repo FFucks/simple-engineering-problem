@@ -46,7 +46,7 @@ class DPK04_impl_8 {
 
 }
 
-@main def dpk04Impl8(): Unit = {
+@main def Dpk04Impl8(): Unit = {
 
     val dpk04 = new DPK04_impl_8
 
