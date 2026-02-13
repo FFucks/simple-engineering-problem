@@ -4,10 +4,7 @@ package DPK01
 //DPK01 Revert String
 //Create a function that can revert a string.
 
-object DPK01_impl_3 extends App {
-
-
-    println(revertString("Hello"))
+class DPK01_impl_3 {
 
     def revertString(str: String): String = {
         val chars = str.toCharArray
@@ -20,4 +17,11 @@ object DPK01_impl_3 extends App {
         strBuilder.toString()
     }
 
+}
+
+@main def Dpk01Impl3(): Unit = {
+
+    val dpk01 = new DPK01_impl_3
+
+    println(dpk01.revertString("Hello"))
 }

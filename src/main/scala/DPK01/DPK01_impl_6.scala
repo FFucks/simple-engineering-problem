@@ -5,10 +5,7 @@ import scala.collection.mutable
 //DPK01 Revert String
 //Create a function that can revert a string.
 
-object DPK01_impl_6 extends App {
-
-
-    println(revertString("Hello"))
+class DPK01_impl_6 {
 
     def revertString(str: String): String = {
         val queue = mutable.Queue[Char]()
@@ -25,4 +22,11 @@ object DPK01_impl_6 extends App {
         
         result
     }
+}
+
+@main def Dpk01Impl6(): Unit = {
+
+    val dpk01 = new DPK01_impl_6
+
+    println(dpk01.revertString("Hello"))
 }
