@@ -1,5 +1,13 @@
 package DPK06
 
+/*DPK06 Tokenizer
+    Create a function that can tokenize a string based on a token.
+
+tokenize("Hello,World,How,Are,You", ",") -> ["Hello", "World", "How", "Are", "You"]
+tokenize("Hello World How Are You", " ") -> ["Hello", "World", "How", "Are", "You"]
+tokenize("Hello-World-How-Are-You", "-") -> ["Hello", "World", "How", "Are", "You"]
+Can you refactor your code and do that without using any prebuild function like split?*/
+
 class DPK06_impl_10 {
 
     def tokenize(text: String, token: String): List[String] = {
