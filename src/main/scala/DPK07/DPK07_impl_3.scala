@@ -9,8 +9,7 @@ Please make sure the same function works with strings as well.
 group_by(["a","b","c","d","e","f","g","h","i","j"], 3) -> [["a","b","c"], ["d","e","f"], ["g","h","i"], ["j"]]
 Can you refactor the code and create your own group by function, do not use any prebuild function.*/
 
-
-class DPK07_impl_1 {
+class DPK07_impl_3 {
 
     def group_by[A](list: List[A], size: Int): List[List[A]] = {
         if (size <= 0) {
@@ -18,31 +17,28 @@ class DPK07_impl_1 {
         }
 
         var result = List.empty[List[A]]
-        var currentGroup = List.empty[A]
-        var count = 0
+        var current = list
 
-        for (element <- list) {
-            currentGroup = currentGroup :+ element
-            count += 1
+        while (current.nonEmpty) {
+            var group = List.empty[A]
+            var count = 0
 
-            if (count == size) {
-                result = result :+ currentGroup
-                currentGroup = List.empty[A]
-                count = 0
+            while (count < size && current.nonEmpty) {
+                group = group :+ current.head
+                current = current.tail
+                count += 1
             }
-        }
 
-        if (currentGroup.nonEmpty) {
-            result = result :+ currentGroup
+            result = result :+ group
         }
 
         result
     }
 }
 
-@main def dpk07Impl1(): Unit = {
+@main def dpk07Impl3(): Unit = {
 
-    val dpk07 = new DPK07_impl_2
+    val dpk07 = new DPK07_impl_3
 
     println(dpk07.group_by[Int](List(), 2))
 
@@ -54,5 +50,4 @@ class DPK07_impl_1 {
 
     println(dpk07.group_by[Int](List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), 5))
     println(dpk07.group_by[String](List("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"), 5))
-
 }

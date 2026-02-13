@@ -1,5 +1,7 @@
 package DPK07
 
+import scala.collection.mutable.ListBuffer
+
 /*DPK07 Group By
 Create a function that can group a list of numbers by a given number.
 
@@ -9,40 +11,36 @@ Please make sure the same function works with strings as well.
 group_by(["a","b","c","d","e","f","g","h","i","j"], 3) -> [["a","b","c"], ["d","e","f"], ["g","h","i"], ["j"]]
 Can you refactor the code and create your own group by function, do not use any prebuild function.*/
 
-
-class DPK07_impl_1 {
+class DPK07_impl_5 {
 
     def group_by[A](list: List[A], size: Int): List[List[A]] = {
         if (size <= 0) {
             throw new IllegalArgumentException("Size must be greater than 0")
         }
 
-        var result = List.empty[List[A]]
-        var currentGroup = List.empty[A]
-        var count = 0
+        val result = ListBuffer[List[A]]()
+        val current = ListBuffer[A]()
 
         for (element <- list) {
-            currentGroup = currentGroup :+ element
-            count += 1
+            current += element
 
-            if (count == size) {
-                result = result :+ currentGroup
-                currentGroup = List.empty[A]
-                count = 0
+            if (current.size == size) {
+                result += current.toList
+                current.clear()
             }
         }
 
-        if (currentGroup.nonEmpty) {
-            result = result :+ currentGroup
+        if (current.nonEmpty) {
+            result += current.toList
         }
 
-        result
+        result.toList
     }
 }
 
-@main def dpk07Impl1(): Unit = {
+@main def dpk07Impl5(): Unit = {
 
-    val dpk07 = new DPK07_impl_2
+    val dpk07 = new DPK07_impl_5
 
     println(dpk07.group_by[Int](List(), 2))
 
@@ -54,5 +52,4 @@ class DPK07_impl_1 {
 
     println(dpk07.group_by[Int](List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), 5))
     println(dpk07.group_by[String](List("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"), 5))
-
 }
