@@ -16,16 +16,9 @@ Refactor the code, can you do that without using IF statements?
 
 pattern_matcher("Usa") -> "English"*/
 
-object DPK04_impl_1 extends App{
+class DPK04_impl_1 {
 
-    println(pattern_matcher("Usa"))
-    println(pattern_matcher("brazil"))
-    println(pattern_matcher("FRANCE"))
-    println(pattern_matcher("GeRMaNy"))
-    println(pattern_matcher("Argentina"))
-
-
-    private def pattern_matcher(country: String): String = {
+     def pattern_matcher(country: String): String = {
         country.toLowerCase() match {
             case "usa"     => "English"
             case "brazil"  => "Portuguese"
@@ -36,5 +29,17 @@ object DPK04_impl_1 extends App{
             case _         => "Unknown language"
         }
     }
+
+}
+
+@main def dpk04Impl1(): Unit = {
+
+    val dpk04 = new DPK04_impl_1
+
+    println(dpk04.pattern_matcher("Usa"))
+    println(dpk04.pattern_matcher("brazil"))
+    println(dpk04.pattern_matcher("FRANCE"))
+    println(dpk04.pattern_matcher("GeRMaNy"))
+    println(dpk04.pattern_matcher("Argentina"))
 
 }

@@ -16,7 +16,7 @@ Refactor the code, can you do that without using IF statements?
 
 pattern_matcher("Usa") -> "English"*/
 
-class DPK04_impl_2 {
+class DPK04_impl_10 {
 
     private val languages = Map(
         "usa" -> "English",
@@ -28,14 +28,17 @@ class DPK04_impl_2 {
     )
 
     def pattern_matcher(country: String): String = {
-        languages.getOrElse(country.toLowerCase, "Unknown language")
+        languages.get(country.toLowerCase) match {
+            case Some(language) => language
+            case None => "Unknown language"
+        }
     }
 
 }
 
-@main def dpk04Impl2(): Unit = {
+@main def dpk04Impl10(): Unit = {
 
-    val dpk04 = new DPK04_impl_2
+    val dpk04 = new DPK04_impl_10
 
     println(dpk04.pattern_matcher("Usa"))
     println(dpk04.pattern_matcher("brazil"))
