@@ -13,7 +13,7 @@ class DPK01_impl_5 {
             stack.push(char)
         }
 
-        val strBuilder = new StringBuilder
+        val strBuilder = new StringBuilder()
 
         while (stack.nonEmpty) {
             strBuilder.append(stack.pop())
