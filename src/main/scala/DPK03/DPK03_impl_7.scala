@@ -19,7 +19,7 @@ class DPK03_impl_7 {
 
         case id: Int =>
             usersByName.values
-                .find(_.id == id)
+                .find(user => user.id == id)
                 .map(_.name)
                 .getOrElse("User not found")
 
@@ -28,7 +28,7 @@ class DPK03_impl_7 {
 
         case email: String =>
             usersByName.values
-                .find(_.email == email)
+                .find(user => user.email == email)
                 .map(_.name)
                 .getOrElse("User not found")
 
