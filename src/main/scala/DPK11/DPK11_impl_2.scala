@@ -12,7 +12,8 @@ class DPK11_impl_2 {
         var result = ""
         var index = 0
 
-        for (_ <- 0 until text.length) {
+        while (index < text.length) {
+
             if (index < text.length) {
                 if (index + token.length <= text.length && text.substring(index, index + token.length) == token) {
 
