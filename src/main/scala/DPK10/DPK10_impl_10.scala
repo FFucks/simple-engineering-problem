@@ -24,7 +24,6 @@ class DPK10_impl_10 {
             stack.push(element)
         }
 
-
         while (stack.nonEmpty) {
             result = func(result, stack.pop())
         }
