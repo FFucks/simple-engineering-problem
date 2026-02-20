@@ -1,5 +1,7 @@
 package DPK10
 
+import scala.collection.mutable
+
 /*
 DPK10 Reduce
     Create a function that can reduce a list to a single value
@@ -12,23 +14,26 @@ a function that will be apply to each element of the collection and an initial v
 Now refactor the code and do not use any prebuild function.
 */
 
-class DPK10_impl_1 {
+class DPK10_impl_5 {
 
     def reduce[A](list: Seq[A], func: (A, A) => A, initialValue: A): A = {
+        val queue = mutable.Queue[A]()
+        queue ++= list
+
         var result = initialValue
 
-        for (element <- list) {
-            result = func(result, element)
+        while (queue.nonEmpty) {
+            result = func(result, queue.dequeue())
         }
 
         result
     }
-
+    
 }
 
-@main def dpk10Impl1(): Unit = {
+@main def dpk10Impl5(): Unit = {
 
-    val dpk10 = new DPK10_impl_1
+    val dpk10 = new DPK10_impl_5
 
     println(dpk10.reduce(List(1, 2, 3, 4, 5), (acc, x) => acc + x, 0)) //15
     println(dpk10.reduce(Array(1, 2, 3, 4, 5), (acc, x) => acc + x, 0)) //15
