@@ -7,15 +7,9 @@ package DPK12
 The sort function should receive a collection(list or array) and return a new sorted list
 .*/
 
-object DPK12_impl_3 extends App {
+class DPK12_impl_3 {
 
-    val arr = Array(10, 9, 8, 7, 6)
-    val list = List(5, 4, 3, 2, 1)
-
-    println(bubble_sort(arr))
-    println(bubble_sort(list))
-
-    private def bubble_sort(list: Seq[Int]): List[Int] = {
+     def bubble_sort(list: Seq[Int]): List[Int] = {
 
         val array = list.toArray
 
@@ -32,4 +26,14 @@ object DPK12_impl_3 extends App {
         array.toList
     }
 
+}
+
+@main def dpk12Impl3(): Unit = {
+    val arr = Array(10, 9, 8, 7, 6)
+    val list = List(5, 4, 3, 2, 1)
+
+    val dpk12 = new DPK12_impl_3
+
+    println(dpk12.bubble_sort(arr))
+    println(dpk12.bubble_sort(list))
 }
