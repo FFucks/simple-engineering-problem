@@ -10,27 +10,13 @@ lookup("john@john.jhon.com") -> "John"*/
 
 class DPK03_impl_4 {
 
-    private val nameById = Map(1 -> "John")
-    private val emailByName = Map("John" -> "john@john.jhon.com")
-    private val nameByEmail = Map("john@john.jhon.com" -> "John")
+    private val users = Map(1 -> "John", "John" -> "john@john.jhon.com", "john@john.jhon.com" -> "John")
 
-    def lookup(id: Int): String = {
-        if (nameById.contains(id)) {
-            nameById(id)
-        } else {
-            "User not found"
-        }
-    }
-
-    def lookup(nameEmail: String): String = {
-        if (emailByName.contains(nameEmail)) {
-            emailByName(nameEmail)
-        }
-        else if (nameByEmail.contains(nameEmail)) {
-            nameByEmail(nameEmail)
-        }
-        else {
-            "User not found"
+    def lookup(value: Any): String = {
+        value match {
+            case id: Int => users.getOrElse(id, "User not found")
+            case nameEmail: String => users.getOrElse(nameEmail, "User not found")
+            case _ => "Invalid type"
         }
     }
 

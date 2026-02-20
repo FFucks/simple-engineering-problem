@@ -8,36 +8,27 @@ Refactor the code so you can lookup for email as well and ge the name and vice v
 lookup("John") -> "john@john.jhon.com"
 lookup("john@john.jhon.com") -> "John"*/
 
+sealed trait Lookup
+
+case class ById(id: Int) extends Lookup
+case class ByName(name: String) extends Lookup
+case class ByEmail(email: String) extends Lookup
+
 class DPK03_impl_3 {
 
-    private val userList = List(
-        User(1, "John", "john@john.jhon.com")
-    )
+    private val nameById = Map(1 -> "John")
+    private val emailByName = Map("John" -> "john@john.jhon.com")
+    private val nameByEmail = Map("john@john.jhon.com" -> "John")
 
-    def lookup(id: Int): String = {
-        var result = "User not found"
+    def lookup(key: Lookup): String = {
+        key match {
+            case ById(id) => nameById.getOrElse(id, "User not found")
 
-        userList.foreach { user =>
-            if (user.id == id) {
-                result = user.name
-            }
+            case ByName(name) => emailByName.getOrElse(name, "User not found")
+
+            case ByEmail(email) => nameByEmail.getOrElse(email, "User not found")
+
         }
-        result
-    }
-
-    def lookup(nameEmail: String): String = {
-        var result = "User not found"
-
-        userList.foreach { user =>
-            if (user.name == nameEmail) {
-                result = user.email
-            }
-            else if (user.email == nameEmail) {
-                result = user.name
-            }
-        }
-
-        result
     }
 }
 
@@ -45,7 +36,9 @@ class DPK03_impl_3 {
 
     val dpk03 = new DPK03_impl_3
 
-    println(dpk03.lookup(1))
-    println(dpk03.lookup("John"))
-    println(dpk03.lookup("john@john.jhon.com"))
+    println(dpk03.lookup(ById(1)))
+    println(dpk03.lookup(ByName("John")))
+    println(dpk03.lookup(ByEmail("john@john.jhon.com")))
+    //It shows error
+    //println(dpk03.lookup(true))
 }

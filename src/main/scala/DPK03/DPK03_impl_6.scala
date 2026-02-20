@@ -8,27 +8,40 @@ Refactor the code so you can lookup for email as well and ge the name and vice v
 lookup("John") -> "john@john.jhon.com"
 lookup("john@john.jhon.com") -> "John"*/
 
-sealed trait Lookup
-
-case class ById(id: Int) extends Lookup
-case class ByName(name: String) extends Lookup
-case class ByEmail(email: String) extends Lookup
+case class User(
+                   id: Int,
+                   name: String,
+                   email: String
+               )
 
 class DPK03_impl_6 {
 
-    private val nameById = Map(1 -> "John")
-    private val emailByName = Map("John" -> "john@john.jhon.com")
-    private val nameByEmail = Map("john@john.jhon.com" -> "John")
+    private val users: Map[Int, User] =
+        Map(
+            1 -> User(1, "John", "john@john.jhon.com"),
+            2 -> User(2, "Fabio", "fabio@fabio.com")
+        )
 
-    def lookup(key: Lookup): String = {
-        key match {
-            case ById(id) => nameById.getOrElse(id, "User not found")
+    def lookup(value: Any): String = value match {
 
-            case ByName(name) => emailByName.getOrElse(name, "User not found")
+        case id: Int =>
+            users.get(id)
+                .map(_.name)
+                .getOrElse("User not found")
 
-            case ByEmail(email) => nameByEmail.getOrElse(email, "User not found")
+        case str: String =>
+            users.values
+                .find(nameEmail => nameEmail.name == str)
+                .map(_.email)
+                .orElse(
+                    users.values
+                        .find(nameEmail => nameEmail.email == str)
+                        .map(_.name)
+                )
+                .getOrElse("User not found")
 
-        }
+        case _ =>
+            "Invalid type"
     }
 }
 
@@ -36,9 +49,8 @@ class DPK03_impl_6 {
 
     val dpk03 = new DPK03_impl_6
 
-    println(dpk03.lookup(ById(1)))
-    println(dpk03.lookup(ByName("John")))
-    println(dpk03.lookup(ByEmail("john@john.jhon.com")))
-    //It shows error
-    //println(dpk03.lookup(true))
+    println(dpk03.lookup(1))
+    println(dpk03.lookup("John"))
+    println(dpk03.lookup("john@john.jhon.com"))
+    println(dpk03.lookup("Eric"))
 }

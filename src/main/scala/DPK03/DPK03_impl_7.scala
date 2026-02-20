@@ -10,16 +10,31 @@ lookup("john@john.jhon.com") -> "John"*/
 
 class DPK03_impl_7 {
 
-    private val users = Map(1 -> "John", "John" -> "john@john.jhon.com", "john@john.jhon.com" -> "John")
+    private val usersByName = Map(
+        "John" -> User(1, "John", "john@john.jhon.com"),
+        "Fabio" -> User(2, "Fabio", "fabio@fabio.com")
+    )
 
-    def lookup(value: Any): String = {
-        value match {
-            case id: Int => users.getOrElse(id, "User not found")
-            case nameEmail: String => users.getOrElse(nameEmail, "User not found")
-            case _ => "Invalid type"
-        }
+    def lookup(value: Any): String = value match {
+
+        case id: Int =>
+            usersByName.values
+                .find(_.id == id)
+                .map(_.name)
+                .getOrElse("User not found")
+
+        case name: String if (usersByName.contains(name)) =>
+            usersByName(name).email
+
+        case email: String =>
+            usersByName.values
+                .find(_.email == email)
+                .map(_.name)
+                .getOrElse("User not found")
+
+        case _ =>
+            "Invalid type"
     }
-
 }
 
 @main def dpk03Impl7(): Unit = {
@@ -29,4 +44,5 @@ class DPK03_impl_7 {
     println(dpk03.lookup(1))
     println(dpk03.lookup("John"))
     println(dpk03.lookup("john@john.jhon.com"))
+    println(dpk03.lookup("Eric"))
 }

@@ -10,39 +10,31 @@ lookup("john@john.jhon.com") -> "John"*/
 
 class DPK03_impl_2 {
 
-    private val userList = List(
-        User(1, "John", "john@john.jhon.com")
-    )
+    private val nameById = Map(1 -> "John")
+    private val emailByName = Map("John" -> "john@john.jhon.com")
+    private val nameByEmail = Map("john@john.jhon.com" -> "John")
 
-    def lookup(id: Int): String = {
-        var index = 0
+    def lookup(value: Any): String = {
 
-        while (index < userList.length) {
-            if (userList(index).id == id) {
-                return userList(index).name
-            }
-
-            index += 1
-        }
-
-        "User not found"
-    }
-
-    def lookup(nameEmail: String): String = {
-
-        for (user <- userList) {
-            nameEmail match {
-                case name if name == user.name => {
-                    return user.email
+        value match {
+            case id: Int =>
+                if (nameById.contains(id)) {
+                    nameById(id)
+                } else {
+                    "User not found"
                 }
-                case email if email == user.email => {
-                    return user.name
-                }
-                case _ =>
-            }
-        }
 
-        "User not found"
+            case nameEmail: String =>
+                if (emailByName.contains(nameEmail)) {
+                    emailByName(nameEmail)
+                } else if (nameByEmail.contains(nameEmail)) {
+                    nameByEmail(nameEmail)
+                } else {
+                    "User not found"
+                }
+
+            case _ => "Invalid Type"
+        }
     }
 }
 
@@ -53,4 +45,5 @@ class DPK03_impl_2 {
     println(dpk03.lookup(1))
     println(dpk03.lookup("John"))
     println(dpk03.lookup("john@john.jhon.com"))
+    println(dpk03.lookup(true))
 }

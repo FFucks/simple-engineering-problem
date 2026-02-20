@@ -10,39 +10,23 @@ lookup("john@john.jhon.com") -> "John"*/
 
 class DPK03_impl_9 {
 
-    private val users = List(
-        (1, "John", "john@john.jhon.com"),
-        (2, "Fabio", "fabio@fabio.com")
-    )
+    private val nameById = Map(1 -> "John")
 
-    def lookup(value: Int | String): String = {
-        for (user <- users) {
-            val id = user._1
-            val name = user._2
-            val email = user._3
+    private val nameByEmail = Map("John" -> "john@john.jhon.com")
 
-            if (value.isInstanceOf[Int]) {
-                val idValue = value.asInstanceOf[Int]
+    private val emailByName = nameByEmail.map(_.swap)
 
-                if (idValue == id) {
-                    return name
-                }
-            }
+    def lookup(value: Int | String): String =
+        value match {
+            case id: Int =>
+                nameById.getOrElse(id, "User not found")
 
-            if (value.isInstanceOf[String]) {
-                val nameEmailValue = value.asInstanceOf[String]
-
-                if (nameEmailValue == name) {
-                    return email
-                }
-                if (nameEmailValue == email) {
-                    return name
-                }
-            }
+            case str: String =>
+                nameByEmail
+                    .get(str)
+                    .orElse(emailByName.get(str))
+                    .getOrElse("User not found")
         }
-
-        "User not found"
-    }
 }
 
 @main def dpk03Impl9(): Unit = {
