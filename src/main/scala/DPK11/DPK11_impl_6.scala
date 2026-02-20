@@ -6,32 +6,32 @@ replace("Hello,World,How,Are,You", ",", "-") -> "Hello-World-How-Are-You" The re
 replace("Hello,World,How,Are,You", ",World,", "-") -> "Hello-How-Are-You"
 Now refactor the code and do not use any prebuild function.*/
 
-class DPK11_impl_1 {
+class DPK11_impl_6 {
 
     def replace(text: String, token: String, newToken: String): String = {
-        var result = ""
+        val result = new StringBuilder
         var index = 0
 
         while (index < text.length) {
-            if (index + token.length <= text.length && text.substring(index, index + token.length) == token) {
 
-                result += newToken
+            if (text.startsWith(token, index)) {
+                result.append(newToken)
                 index += token.length
 
             } else {
-                result += text(index)
+                result.append(text(index))
                 index += 1
             }
         }
 
-        result
+        result.toString
     }
 
 }
 
-@main def dpk11Impl1(): Unit = {
+@main def dpk11Impl6(): Unit = {
 
-    val dpk11 = new DPK11_impl_1
+    val dpk11 = new DPK11_impl_6
 
     println(dpk11.replace("Hello,World,How,Are,You", ",", "-"))
     println(dpk11.replace("Hello,World,How,Are,You", ",World,", "-"))
