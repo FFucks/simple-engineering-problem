@@ -8,7 +8,7 @@ Refactor the code to receive by parameter how many numbers you want to generate.
 fizzbuzz(10) -> [1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz"]
 */
 
-class DPK13_impl_7 {
+class DPK13_impl_8 {
 
     def fizzBuzz(numbers: Int): List[Int | String] = {
         var result = List.empty[Int | String]
@@ -39,9 +39,9 @@ class DPK13_impl_7 {
     }
 }
 
-@main def dpk13Impl7(): Unit = {
+@main def dpk13Impl8(): Unit = {
 
-    val dpk13 = new DPK13_impl_7
+    val dpk13 = new DPK13_impl_8
 
     println(dpk13.fizzBuzz(100))
     println(dpk13.fizzBuzz(10))
