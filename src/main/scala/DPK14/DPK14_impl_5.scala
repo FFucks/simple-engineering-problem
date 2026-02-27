@@ -1,5 +1,7 @@
 package DPK14
 
+import scala.collection.mutable
+
 /*
 Create a function that can move a fighter in a 2D grid. The grid should be a 2D array.
 grid = [
@@ -22,47 +24,45 @@ move(grid, [0,0], ["up", "left", "down", "right"]) -> ["ken", "M.Bison", "Vega"]
 
 */
 
-class DPK14_impl_2 {
-
+class DPK14_impl_5 {
     def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
+        val queue = mutable.Queue[String]()
+        queue.enqueueAll(moves)
+
         var beaten = List.empty[String]
         var row = position._1
         var col = position._2
         val fighter = grid(row)(col)
 
-        for (move <- moves) {
+        while (queue.nonEmpty) {
+
+            val move = queue.dequeue()
+
             grid(row)(col) = ""
 
             move match {
-                case "up" =>
-                    row = (row - 1 + grid.length) % grid.length
-
-                case "down" =>
-                    row = (row + 1) % grid.length
-
-                case "left" =>
-                    col = (col - 1 + grid(row).length) % grid(row).length
-
-                case "right" =>
-                    col = (col + 1) % grid(row).length
-
-                case _ =>
-                    ()
+                case "up" => row = (row - 1 + grid.length) % grid.length
+                case "down" => row = (row + 1) % grid.length
+                case "left" => col = (col - 1 + grid(row).length) % grid(row).length
+                case "right" => col = (col + 1) % grid(row).length
+                case _ => ()
             }
 
             val opponent = grid(row)(col)
             if (opponent != "") {
                 beaten = beaten :+ opponent
             }
+
             grid(row)(col) = fighter
         }
+
         beaten
     }
 }
 
-@main def Dpk14Impl2(): Unit = {
+@main def Dpk14Impl5(): Unit = {
 
-    val dpk14 = new DPK14_impl_2
+    val dpk14 = new DPK14_impl_5
 
     val grid: Array[Array[String]] = Array(
         Array("Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"),
