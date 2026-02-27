@@ -71,20 +71,14 @@ class DPK14_impl_1 {
 
     val dpk14 = new DPK14_impl_1
 
-    /*val grid: Array[Array[String]] = Array(
+    val grid: Array[Array[String]] = Array(
         Array("Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"),
         Array("Ken", "Chun Li", "Zangief", "Dhalsim", "Sagat", "M.Bison")
-    )*/
-    val grid: Array[Array[String]] = Array(
-        Array("Ryu", "E.Honda", "Blanka"),
-        Array("Ken", "Chun Li", "Zangief")
     )
 
     val position = (0, 0)
 
-    //val moves: List[String] = List("up", "left", "down", "right")
-
-    val moves: List[String] = List("up", "left", "down", "left")
+    val moves: List[String] = List("up", "left", "down", "right")
 
     println(dpk14.move(grid, position, moves))
 }
