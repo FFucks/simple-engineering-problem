@@ -22,7 +22,14 @@ move(grid, [0,0], ["up", "left", "down", "right"]) -> ["ken", "M.Bison", "Vega"]
 
 */
 
-class DPK14_impl_8 {
+class DPK14_impl_9 {
+
+    private def getOpponent(grid: Array[Array[String]], row: Int, col: Int): Option[String] = {
+        if (grid(row)(col) != "") {
+            Some(grid(row)(col))
+        } else
+            None
+    }
 
     def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
         var beaten = List.empty[String]
@@ -30,23 +37,20 @@ class DPK14_impl_8 {
         var col = position._2
         val fighter = grid(row)(col)
 
-        for (index <- 0 until moves.length) {
+        for (move <- moves) {
             grid(row)(col) = ""
-
-            val move = moves(index)
 
             if (move == "up") {
                 row = (row - 1 + grid.length) % grid.length
-            }  else if (move == "down") {
+            } else if (move == "down") {
                 row = (row + 1) % grid.length
             } else if (move == "left") {
                 col = (col - 1 + grid(row).length) % grid(row).length
-            } else {
+            } else if (move == "right") {
                 col = (col + 1) % grid(row).length
             }
 
-            val opponent = grid(row)(col)
-            if (opponent != "") beaten = beaten :+ opponent
+            getOpponent(grid, row, col).foreach(opponent => beaten = beaten :+ opponent)
 
             grid(row)(col) = fighter
         }
@@ -55,9 +59,9 @@ class DPK14_impl_8 {
     }
 }
 
-@main def Dpk14Impl8(): Unit = {
+@main def Dpk14Impl9(): Unit = {
 
-    val dpk14 = new DPK14_impl_8
+    val dpk14 = new DPK14_impl_9
 
     val grid: Array[Array[String]] = Array(
         Array("Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"),
