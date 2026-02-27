@@ -1,5 +1,7 @@
 package DPK13
 
+import scala.collection.mutable
+
 /*DPK13 FizzBuzz
 Create a function that can return a list of numbers from 1 to 100. For multiples of three return “Fizz” instead of the number and
 for the multiples of five return “Buzz ”.For numbers which are multiples of both three and five return “FizzBuzz”.
@@ -8,31 +10,35 @@ Refactor the code to receive by parameter how many numbers you want to generate.
 fizzbuzz(10) -> [1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz"]
 */
 
-class DPK13_impl_1 {
+class DPK13_impl_4 {
 
     def fizzBuzz(numbers: Int): List[Int | String] = {
         var result = List.empty[Int | String]
+        val queue = mutable.Queue[Int | String]()
 
-        for (element <- 1 to numbers) {
+        for (element <- numbers to 1 by -1) {
             if (element % 15 == 0) {
-                result = result :+ "FizzBuzz"
+                queue.enqueue("FizzBuzz")
             } else if (element % 3 == 0) {
-                result = result :+ "Fizz"
+                queue.enqueue("Fizz")
             } else if (element % 5 == 0) {
-                result = result :+ "Buzz"
+                queue.enqueue("Buzz")
             } else {
-                result = result :+ element
+                queue.enqueue(element)
             }
-
         }
 
-        result;
+        while (queue.nonEmpty) {
+            result = queue.dequeue() :: result
+        }
+
+        result
     }
 }
 
-@main def dpk13Impl1(): Unit = {
+@main def dpk13Impl4(): Unit = {
 
-    val dpk13 = new DPK13_impl_1
+    val dpk13 = new DPK13_impl_4
 
     println(dpk13.fizzBuzz(100))
     println(dpk13.fizzBuzz(10))

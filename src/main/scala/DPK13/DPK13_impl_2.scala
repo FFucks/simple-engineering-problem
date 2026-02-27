@@ -8,31 +8,30 @@ Refactor the code to receive by parameter how many numbers you want to generate.
 fizzbuzz(10) -> [1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz"]
 */
 
-class DPK13_impl_1 {
+class DPK13_impl_2 {
 
     def fizzBuzz(numbers: Int): List[Int | String] = {
         var result = List.empty[Int | String]
 
         for (element <- 1 to numbers) {
             if (element % 15 == 0) {
-                result = result :+ "FizzBuzz"
+                result = "FizzBuzz" :: result
             } else if (element % 3 == 0) {
-                result = result :+ "Fizz"
+                result = "Fizz" :: result
             } else if (element % 5 == 0) {
-                result = result :+ "Buzz"
+                result = "Buzz" :: result
             } else {
-                result = result :+ element
+                result = element :: result
             }
-
         }
 
-        result;
+        result.reverse;
     }
 }
 
-@main def dpk13Impl1(): Unit = {
+@main def dpk13Impl2(): Unit = {
 
-    val dpk13 = new DPK13_impl_1
+    val dpk13 = new DPK13_impl_2
 
     println(dpk13.fizzBuzz(100))
     println(dpk13.fizzBuzz(10))
