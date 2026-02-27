@@ -14,13 +14,11 @@ class DPK12_impl_9 {
 
         array.indices.foreach { passNumber =>
             (0 until array.length - passNumber - 1).foreach { index =>
-
                 if (array(index) > array(index + 1)) {
                     val temp = array(index)
                     array(index) = array(index + 1)
                     array(index + 1) = temp
                 }
-
             }
         }
 
