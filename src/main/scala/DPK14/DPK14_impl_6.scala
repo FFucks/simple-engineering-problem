@@ -1,6 +1,7 @@
 package DPK14
 
-import scala.collection.mutable
+import scala.collection.mutable.ArrayBuffer
+
 /*
 Create a function that can move a fighter in a 2D grid. The grid should be a 2D array.
 grid = [
@@ -23,18 +24,15 @@ move(grid, [0,0], ["up", "left", "down", "right"]) -> ["ken", "M.Bison", "Vega"]
 
 */
 
-class DPK14_impl_4 {
-    def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
-        val stack = mutable.Stack[String]()
-        stack.pushAll(moves.reverse)
+class DPK14_impl_6 {
 
-        var beaten = List.empty[String]
+    def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
+        val beaten = ArrayBuffer[String]()
         var row = position._1
         var col = position._2
         val fighter = grid(row)(col)
 
-        while (stack.nonEmpty) {
-            val move = stack.pop()
+        for (move <- moves) {
             grid(row)(col) = ""
 
             move match {
@@ -46,20 +44,20 @@ class DPK14_impl_4 {
             }
 
             val opponent = grid(row)(col)
-            if (opponent != "") {
-                beaten = beaten :+ opponent
+            if (opponent != ""){
+                beaten += opponent
             }
 
             grid(row)(col) = fighter
         }
 
-        beaten
+        beaten.toList
     }
 }
 
-@main def Dpk14Impl4(): Unit = {
+@main def Dpk14Impl6(): Unit = {
 
-    val dpk14 = new DPK14_impl_4
+    val dpk14 = new DPK14_impl_6
 
     val grid: Array[Array[String]] = Array(
         Array("Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"),
