@@ -16,25 +16,40 @@ Refactor the code, can you do that without using IF statements?
 
 pattern_matcher("Usa") -> "English"*/
 
+sealed trait Country {
+    def language: String
+}
+case object Usa extends Country {
+    val language = "English"
+}
+case object Brazil extends Country {
+    val language = "Portuguese"
+}
+case object Spain extends Country {
+    val language = "Spanish"
+}
+case object Italy extends Country {
+    val language = "Italian"
+}
+case object France extends Country {
+    val language = "French"
+}
+case object Germany extends Country {
+    val language = "German"
+}
+
 class DPK04_impl_5 {
 
-    private val languages = Map(
-        "usa" -> "English",
-        "brazil" -> "Portuguese",
-        "spain" -> "Spanish",
-        "italy" -> "Italian",
-        "france" -> "French",
-        "germany" -> "German"
-    )
-
     def pattern_matcher(country: String): String = {
-
-        val countryLowerCase = country.toLowerCase
-
-        languages.find(pair => pair._1 == countryLowerCase)
-            .map(pair => pair._2)
-            .getOrElse("Unknown language")
-
+        country.toLowerCase match {
+            case "usa" => Usa.language
+            case "brazil" => Brazil.language
+            case "spain" => Spain.language
+            case "italy" => Italy.language
+            case "france" => France.language
+            case "germany" => Germany.language
+            case _ => "Unknown language"
+        }
     }
 }
 
