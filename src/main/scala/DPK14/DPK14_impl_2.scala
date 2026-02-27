@@ -22,7 +22,7 @@ move(grid, [0,0], ["up", "left", "down", "right"]) -> ["ken", "M.Bison", "Vega"]
 
 */
 
-class DPK14_impl_1 {
+class DPK14_impl_2 {
 
     def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
         var beaten = List.empty[String]
@@ -32,44 +32,37 @@ class DPK14_impl_1 {
 
         for (move <- moves) {
             grid(row)(col) = ""
-            if (move == "up") {
-                row = (row - 1 + grid.length) % grid.length
-                val opponent = grid(row)(col)
-                if (opponent != "") {
-                    beaten = beaten :+ opponent
-                }
-                grid(row)(col) = fighter
-            } else if (move == "left") {
-                col = (col - 1 + grid(row).length) % grid(row).length
-                val opponent = grid(row)(col)
-                if (opponent != "") {
-                    beaten = beaten :+ opponent
-                }
-                grid(row)(col) = fighter
-            } else if (move == "down") {
-                row = (row + 1 + grid.length) % grid.length
-                val opponent = grid(row)(col)
-                if (opponent != "") {
-                    beaten = beaten :+ opponent
-                }
-                grid(row)(col) = fighter
-            } else if (move == "right") {
-                col = (col + 1 + grid(row).length) % grid(row).length
-                val opponent = grid(row)(col)
-                if (opponent != "") {
-                    beaten = beaten :+ opponent
-                }
-                grid(row)(col) = fighter
-            }
-        }
 
+            move match {
+                case "up" =>
+                    row = (row - 1 + grid.length) % grid.length
+
+                case "down" =>
+                    row = (row + 1) % grid.length
+
+                case "left" =>
+                    col = (col - 1 + grid(0).length) % grid(0).length
+
+                case "right" =>
+                    col = (col + 1) % grid(0).length
+
+                case _ =>
+                    println(s"Invalid Movement: $move")
+            }
+
+            val opponent = grid(row)(col)
+            if (opponent != "") {
+                beaten = beaten :+ opponent
+            }
+            grid(row)(col) = fighter
+        }
         beaten
     }
 }
 
-@main def Dpk14Impl1(): Unit = {
+@main def Dpk14Impl2(): Unit = {
 
-    val dpk14 = new DPK14_impl_1
+    val dpk14 = new DPK14_impl_2
 
     val grid: Array[Array[String]] = Array(
         Array("Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"),
@@ -82,4 +75,3 @@ class DPK14_impl_1 {
 
     println(dpk14.move(grid, position, moves))
 }
-
