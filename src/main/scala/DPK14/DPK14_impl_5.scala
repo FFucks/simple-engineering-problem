@@ -25,6 +25,7 @@ move(grid, [0,0], ["up", "left", "down", "right"]) -> ["ken", "M.Bison", "Vega"]
 */
 
 class DPK14_impl_5 {
+
     def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
         val queue = mutable.Queue[String]()
         queue.enqueueAll(moves)
