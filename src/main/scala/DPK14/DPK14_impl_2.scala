@@ -41,10 +41,10 @@ class DPK14_impl_2 {
                     row = (row + 1) % grid.length
 
                 case "left" =>
-                    col = (col - 1 + grid(0).length) % grid(0).length
+                    col = (col - 1 + grid(row).length) % grid(row).length
 
                 case "right" =>
-                    col = (col + 1) % grid(0).length
+                    col = (col + 1) % grid(row).length
 
                 case _ =>
                     println(s"Invalid Movement: $move")

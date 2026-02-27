@@ -1,5 +1,6 @@
 package DPK14
 
+import scala.collection.mutable
 /*
 Create a function that can move a fighter in a 2D grid. The grid should be a 2D array.
 grid = [
@@ -22,64 +23,50 @@ move(grid, [0,0], ["up", "left", "down", "right"]) -> ["ken", "M.Bison", "Vega"]
 
 */
 
-class DPK14_impl_1 {
-
+class DPK14_impl_4 {
     def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
+        val stack = mutable.Stack[String]()
+        stack.pushAll(moves.reverse)
+
         var beaten = List.empty[String]
         var row = position._1
         var col = position._2
         val fighter = grid(row)(col)
 
-        for (move <- moves) {
+        while (stack.nonEmpty) {
+            val move = stack.pop()
             grid(row)(col) = ""
-            if (move == "up") {
-                row = (row - 1 + grid.length) % grid.length
-                val opponent = grid(row)(col)
-                if (opponent != "") {
-                    beaten = beaten :+ opponent
-                }
-                grid(row)(col) = fighter
-            } else if (move == "down") {
-                row = (row + 1) % grid.length
-                val opponent = grid(row)(col)
-                if (opponent != "") {
-                    beaten = beaten :+ opponent
-                }
-                grid(row)(col) = fighter
-            } else if (move == "left") {
-                col = (col - 1 + grid(row).length) % grid(row).length
-                val opponent = grid(row)(col)
-                if (opponent != "") {
-                    beaten = beaten :+ opponent
-                }
-                grid(row)(col) = fighter
-            } else if (move == "right") {
-                col = (col + 1) % grid(row).length
-                val opponent = grid(row)(col)
-                if (opponent != "") {
-                    beaten = beaten :+ opponent
-                }
-                grid(row)(col) = fighter
+
+            move match {
+                case "up" => row = (row - 1 + grid.length) % grid.length
+                case "down" => row = (row + 1) % grid.length
+                case "left" => col = (col - 1 + grid(row).length) % grid(row).length
+                case "right" => col = (col + 1) % grid(row).length
+                case _ => ()
             }
+
+            val opponent = grid(row)(col)
+            if (opponent != "") beaten = beaten :+ opponent
+
+            grid(row)(col) = fighter
         }
 
         beaten
     }
 }
 
-@main def Dpk14Impl1(): Unit = {
+@main def Dpk14Impl4(): Unit = {
 
-    val dpk14 = new DPK14_impl_1
+    val dpk14 = new DPK14_impl_4
 
     val grid: Array[Array[String]] = Array(
         Array("Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"),
         Array("Ken", "Chun Li", "Zangief", "Dhalsim", "Sagat", "M.Bison")
     )
 
-    val position = (1, 0)
+    val position = (0, 0)
 
     val moves: List[String] = List("up", "left", "down", "right")
 
     println(dpk14.move(grid, position, moves))
 }
-
