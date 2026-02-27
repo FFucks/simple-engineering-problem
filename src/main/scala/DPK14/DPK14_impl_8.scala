@@ -34,10 +34,15 @@ class DPK14_impl_8 {
 
             val move = moves(index)
 
-            if (move == "up") row = (row - 1 + grid.length) % grid.length
-            else if (move == "down") row = (row + 1) % grid.length
-            else if (move == "left") col = (col - 1 + grid(row).length) % grid(row).length
-            else if (move == "right") col = (col + 1) % grid(row).length
+            if (move == "up") {
+                row = (row - 1 + grid.length) % grid.length
+            }  else if (move == "down") {
+                row = (row + 1) % grid.length
+            } else if (move == "left") {
+                col = (col - 1 + grid(row).length) % grid(row).length
+            } else {
+                col = (col + 1) % grid(row).length
+            }
 
             val opponent = grid(row)(col)
             if (opponent != "") beaten = beaten :+ opponent
