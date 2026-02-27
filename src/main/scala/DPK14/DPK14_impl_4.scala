@@ -24,6 +24,7 @@ move(grid, [0,0], ["up", "left", "down", "right"]) -> ["ken", "M.Bison", "Vega"]
 */
 
 class DPK14_impl_4 {
+
     def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
         val stack = mutable.Stack[String]()
         stack.pushAll(moves.reverse)

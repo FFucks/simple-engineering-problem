@@ -1,7 +1,5 @@
 package DPK14
 
-import scala.collection.mutable
-
 /*
 Create a function that can move a fighter in a 2D grid. The grid should be a 2D array.
 grid = [
@@ -24,28 +22,32 @@ move(grid, [0,0], ["up", "left", "down", "right"]) -> ["ken", "M.Bison", "Vega"]
 
 */
 
-class DPK14_impl_5 {
+enum Direction:
+    case Up, Down, Left, Right
 
-    def move(grid: Array[Array[String]], position: (Int, Int), moves: List[String]): List[String] = {
-        val queue = mutable.Queue[String]()
-        queue.enqueueAll(moves)
+class DPK14_impl_10 {
 
+    def move(grid: Array[Array[String]], position: (Int, Int), moves: List[Direction]): List[String] = {
         var beaten = List.empty[String]
         var row = position._1
         var col = position._2
         val fighter = grid(row)(col)
 
-        while (queue.nonEmpty) {
-            val move = queue.dequeue()
-
+        for (move <- moves) {
             grid(row)(col) = ""
 
             move match {
-                case "up" => row = (row - 1 + grid.length) % grid.length
-                case "down" => row = (row + 1) % grid.length
-                case "left" => col = (col - 1 + grid(row).length) % grid(row).length
-                case "right" => col = (col + 1) % grid(row).length
-                case _ => ()
+                case Direction.Up =>
+                    row = (row - 1 + grid.length) % grid.length
+
+                case Direction.Down =>
+                    row = (row + 1) % grid.length
+
+                case Direction.Left =>
+                    col = (col - 1 + grid(row).length) % grid(row).length
+
+                case Direction.Right =>
+                    col = (col + 1) % grid(row).length
             }
 
             val opponent = grid(row)(col)
@@ -60,9 +62,9 @@ class DPK14_impl_5 {
     }
 }
 
-@main def Dpk14Impl5(): Unit = {
+@main def Dpk14Impl10(): Unit = {
 
-    val dpk14 = new DPK14_impl_5
+    val dpk14 = new DPK14_impl_10
 
     val grid: Array[Array[String]] = Array(
         Array("Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"),
@@ -71,7 +73,12 @@ class DPK14_impl_5 {
 
     val position = (0, 0)
 
-    val moves: List[String] = List("up", "left", "down", "right")
+    val moves = List(
+        Direction.Up,
+        Direction.Left,
+        Direction.Down,
+        Direction.Right
+    )
 
     println(dpk14.move(grid, position, moves))
 }
