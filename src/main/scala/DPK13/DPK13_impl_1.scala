@@ -15,12 +15,12 @@ class DPK13_impl_1 {
         var result = List.empty[Int | String]
 
         for (element <- 1 to numbers) {
-            if (element % 3 == 0) {
+            if (element % 15 == 0) {
+                result = result :+ "FizzBuzz"
+            } else if (element % 3 == 0) {
                 result = result :+ "Fizz"
             } else if (element % 5 == 0) {
                 result = result :+ "Buzz"
-            } else if (element % 15 == 0) {
-                result = result :+ "FizzBuzz"
             } else {
                 result = result :+ element
             }
@@ -37,4 +37,5 @@ class DPK13_impl_1 {
 
     println(dpk13.fizzBuzz(100))
     println(dpk13.fizzBuzz(10))
+    println(dpk13.fizzBuzz(15))
 }
