@@ -18,23 +18,19 @@ pattern_matcher("Usa") -> "English"*/
 
 class DPK04_impl_3 {
 
-    private val languages = Map(
-        "usa" -> "English",
-        "brazil" -> "Portuguese",
-        "spain" -> "Spanish",
-        "italy" -> "Italian",
-        "france" -> "French",
-        "germany" -> "German"
+    private val languages = List(
+        ("usa", "English"),
+        ("brazil", "Portuguese"),
+        ("spain", "Spanish"),
+        ("italy", "Italian"),
+        ("france", "French"),
+        ("germany", "German")
     )
 
     def pattern_matcher(country: String): String = {
-        val countryLowerCase = country.toLowerCase
-
-        if (languages.contains(countryLowerCase)) {
-            languages(countryLowerCase)
-        } else {
-            "Unknown language"
-        }
+        languages.find(pair => pair._1 == country.toLowerCase)
+            .map(pair => pair._2)
+            .getOrElse("Unknown language")
     }
 
 }
