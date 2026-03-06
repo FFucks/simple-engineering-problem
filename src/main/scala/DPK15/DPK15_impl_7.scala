@@ -7,6 +7,7 @@ class DPK15_impl_7
     val john = new PersonImpl7("John", 30)
     val paul = new PersonImpl7("Paul", 35)
     val george = new PersonImpl7("George", 28)
+    val ringo = new PersonImpl7("Ringo", 26)
 
     john.addFriend(paul)
     john.addFriend(george)
@@ -15,6 +16,7 @@ class DPK15_impl_7
 
     george.addFriend(john)
     george.addFriend(paul)
+    george.addFriend(ringo)
 
     val people = List(john, paul, george)
 
