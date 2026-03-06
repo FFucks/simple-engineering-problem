@@ -2,7 +2,6 @@ package DPK15
 
 class DPK15_impl_9
 
-
 @main def dpk15Impl9(): Unit = {
 
     val john = new PersonImpl9("John", 30)
