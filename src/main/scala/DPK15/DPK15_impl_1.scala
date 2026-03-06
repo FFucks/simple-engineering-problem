@@ -25,9 +25,9 @@ class DPK15_impl_1
 
 @main def dpk15Impl1(): Unit = {
 
-    val john = new Person("John", 30)
-    val paul = new Person("Paul", 35)
-    val george = new Person("George", 28)
+    val john = new PersonImpl1("John", 30)
+    val paul = new PersonImpl1("Paul", 35)
+    val george = new PersonImpl1("George", 28)
 
     john.addFriend("Paul")
     john.addFriend("George")
@@ -40,16 +40,16 @@ class DPK15_impl_1
 
     val people = List(john, paul, george)
 
-    val service = new PersonService(people)
+    val service = new PersonServiceImpl1(people)
 
     println(service.personWithMostFriends().getName())
     println(service.personWithLeastFriends().getName())
     println(service.personWithOldestFriend().getName())
 }
 
-class Person (name: String, age: Int) {
+class PersonImpl1 (name: String, age: Int) {
 
-    private val friendsList = new Friend()
+    private val friendsList = new FriendImpl1()
 
     def addFriend(name: String): Unit = {
         friendsList.addFriend(name)
@@ -76,7 +76,7 @@ class Person (name: String, age: Int) {
     }
 }
 
-class Friend {
+class FriendImpl1 {
 
     private var friends: List[String] = List()
 
@@ -95,9 +95,9 @@ class Friend {
     }
 }
 
-class PersonService(private val people: List[Person]) {
+class PersonServiceImpl1(private val people: List[PersonImpl1]) {
 
-    def personWithMostFriends(): Person = {
+    def personWithMostFriends(): PersonImpl1 = {
         var result = people.head
         var maxFriends = people.head.getFriendsCount()
 
@@ -111,7 +111,7 @@ class PersonService(private val people: List[Person]) {
         result
     }
 
-    def personWithLeastFriends(): Person = {
+    def personWithLeastFriends(): PersonImpl1 = {
         var result = people.head
         var minFriends = people.head.getFriendsCount()
 
@@ -125,8 +125,8 @@ class PersonService(private val people: List[Person]) {
         result
     }
 
-    def personWithOldestFriend(): Person = {
-        var result: Person = people.head
+    def personWithOldestFriend(): PersonImpl1 = {
+        var result: PersonImpl1 = people.head
         var oldestAge: Int = 0
 
         for (person <- people) {
