@@ -4,9 +4,109 @@ class DPK15_impl_2
 
 @main def dpk15Impl2(): Unit = {
 
-    val john = new PersonImpl2("John", 30)
-    val paul = new PersonImpl2("Paul", 35)
-    val george = new PersonImpl2("George", 28)
+    class Person(name: String, age: Int) {
+        private val friendsList = new Friend()
+
+        def addFriend(name: String): Unit = {
+            friendsList.addFriend(name)
+        }
+
+        def removeFriend(name: String): Unit = {
+            friendsList.removeFriend(name)
+        }
+
+        def getFriends(): List[String] = {
+            friendsList.getFriends()
+        }
+
+        def getFriendsCount(): Int = {
+            friendsList.getFriends().size
+        }
+
+        def getAge(): Int = {
+            age
+        }
+
+        def getName(): String = {
+            name
+        }
+    }
+
+    class Friend {
+        private var friends: List[String] = List()
+
+        def addFriend(name: String): Unit = {
+            if (!friends.contains(name)) {
+                friends = friends :+ name
+            }
+        }
+
+        def removeFriend(name: String): Unit = {
+            friends = friends.filter(_ != name)
+        }
+
+        def getFriends(): List[String] = {
+            friends
+        }
+    }
+
+    class PersonServiceImpl2(private val people: List[Person]) {
+
+        def personWithMostFriends(): Person = {
+            var result = people.head
+            var maxFriends = result.getFriendsCount()
+
+            people.foreach { person =>
+                val count = person.getFriendsCount()
+
+                if (count > maxFriends) {
+                    maxFriends = count
+                    result = person
+                }
+            }
+
+            result
+        }
+
+        def personWithLeastFriends(): Person = {
+            var result = people.head
+            var minFriends = result.getFriendsCount()
+
+            people.foreach { person =>
+                val count = person.getFriendsCount()
+
+                if (count < minFriends) {
+                    minFriends = count
+                    result = person
+                }
+            }
+
+            result
+        }
+
+        def personWithOldestFriend(): Person = {
+            var result: Person = people.head
+            var oldestAge: Int = 0
+
+            for (person <- people) {
+                for (friendName <- person.getFriends()) {
+                    for (p <- people) {
+                        if (p.getName() == friendName) {
+                            if (p.getAge() > oldestAge) {
+                                oldestAge = p.getAge()
+                                result = person
+                            }
+                        }
+                    }
+                }
+            }
+            result
+        }
+    }
+
+    val john = new Person("John", 30)
+    val paul = new Person("Paul", 35)
+    val george = new Person("George", 28)
 
     john.addFriend("Paul")
     john.addFriend("George")
@@ -24,106 +124,4 @@ class DPK15_impl_2
     println(service.personWithMostFriends().getName())
     println(service.personWithLeastFriends().getName())
     println(service.personWithOldestFriend().getName())
-}
-
-class PersonImpl2 (name: String, age: Int) {
-
-    private val friendsList = new FriendImpl2()
-
-    def addFriend(name: String): Unit = {
-        friendsList.addFriend(name)
-    }
-
-    def removeFriend(name: String): Unit = {
-        friendsList.removeFriend(name)
-    }
-
-    def getFriends(): List[String] = {
-        friendsList.getFriends()
-    }
-
-    def getFriendsCount(): Int = {
-        friendsList.getFriends().size
-    }
-
-    def getAge(): Int = {
-        age
-    }
-
-    def getName(): String = {
-        name
-    }
-}
-
-class FriendImpl2 {
-
-    private var friends: List[String] = List()
-
-    def addFriend(name: String): Unit = {
-        if (!friends.contains(name)) {
-            friends = friends :+ name
-        }
-    }
-
-    def removeFriend(name: String): Unit = {
-        friends = friends.filter(_ != name)
-    }
-
-    def getFriends(): List[String] = {
-        friends
-    }
-}
-
-class PersonServiceImpl2(private val people: List[PersonImpl2]) {
-
-    def personWithMostFriends(): PersonImpl2 = {
-        var result = people.head
-        var maxFriends = result.getFriendsCount()
-
-        people.foreach { person =>
-            val count = person.getFriendsCount()
-
-            if (count > maxFriends) {
-                maxFriends = count
-                result = person
-            }
-        }
-
-        result
-    }
-
-    def personWithLeastFriends(): PersonImpl2 = {
-        var result = people.head
-        var minFriends = result.getFriendsCount()
-
-        people.foreach { person =>
-            val count = person.getFriendsCount()
-
-            if (count < minFriends) {
-                minFriends = count
-                result = person
-            }
-        }
-
-        result
-    }
-
-    def personWithOldestFriend(): PersonImpl2 = {
-        var result: PersonImpl2 = people.head
-        var oldestAge: Int = 0
-
-        for (person <- people) {
-            for (friendName <- person.getFriends()) {
-                for (p <- people) {
-                    if (p.getName() == friendName) {
-                        if (p.getAge() > oldestAge) {
-                            oldestAge = p.getAge()
-                            result = person
-                        }
-                    }
-                }
-            }
-        }
-        result
-    }
 }
