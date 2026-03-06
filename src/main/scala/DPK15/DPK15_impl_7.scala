@@ -36,7 +36,7 @@ class PersonImpl7 (name: String, age: Int) {
 
     def getFriends(): List[PersonImpl7] = friendsList.getFriends()
 
-    def getFriendsCount(): Int = friendsList.getFriends().size
+    def getFriendsCount(): Int = friendsList.getFriendsCount()
 
     def getAge(): Int = age
 
