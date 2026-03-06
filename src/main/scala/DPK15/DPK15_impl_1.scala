@@ -25,22 +25,27 @@ class DPK15_impl_1
 
 @main def dpk15Impl1(): Unit = {
 
-    val person = new Person("John", 30)
+    val john = new Person("John", 30)
+    val paul = new Person("Paul", 35)
+    val george = new Person("George", 28)
 
-    person.addFriend("Paul")
-    person.addFriend("George")
-    person.addFriend("Ringo")
+    john.addFriend("Paul")
+    john.addFriend("George")
 
-    println(person.getFriends())
-    println(person.getAge)
-    println(person.getName)
+    paul.addFriend("John")
 
-    person.removeFriend("George")
+    george.addFriend("John")
+    george.addFriend("Paul")
+    george.addFriend("Ringo")
 
-    println(person.getFriends())
+    val people = List(john, paul, george)
+
+    val service = new PersonService(people)
+
+    println(service.personWithMostFriends().getName())
+    println(service.personWithLeastFriends().getName())
+    println(service.personWithOldestFriend().getName())
 }
-
-
 
 class Person (name: String, age: Int) {
 
@@ -58,11 +63,15 @@ class Person (name: String, age: Int) {
         friendsList.getFriends()
     }
 
-    def getAge: Int = {
+    def getFriendsCount(): Int = {
+        friendsList.getFriends().size
+    }
+
+    def getAge(): Int = {
         age
     }
 
-    def getName: String = {
+    def getName(): String = {
         name
     }
 }
@@ -83,6 +92,56 @@ class Friend {
 
     def getFriends(): List[String] = {
         friends
+    }
+}
+
+class PersonService(private val people: List[Person]) {
+
+    def personWithMostFriends(): Person = {
+        var result = people.head
+        var maxFriends = people.head.getFriendsCount()
+
+        for (person <- people) {
+            if (person.getFriendsCount() > maxFriends) {
+                maxFriends = person.getFriendsCount()
+                result = person
+            }
+        }
+
+        result
+    }
+
+    def personWithLeastFriends(): Person = {
+        var result = people.head
+        var minFriends = people.head.getFriendsCount()
+
+        for (person <- people) {
+            if (person.getFriendsCount() < minFriends) {
+                minFriends = person.getFriendsCount()
+                result = person
+            }
+        }
+
+        result
+    }
+
+    def personWithOldestFriend(): Person = {
+        var result: Person = people.head
+        var oldestAge: Int = 0
+
+        for (person <- people) {
+            for (friendName <- person.getFriends()) {
+                for (p <- people) {
+                    if (p.getName() == friendName) {
+                        if (p.getAge() > oldestAge) {
+                            oldestAge = p.getAge()
+                            result = person
+                        }
+                    }
+                }
+            }
+        }
+        result
     }
 }
 
