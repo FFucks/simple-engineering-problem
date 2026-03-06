@@ -25,27 +25,37 @@ class DPK15_impl_1
 
 @main def dpk15Impl1(): Unit = {
 
-    val person = new Person("John", 30, List())
+    val person = new Person("John", 30)
 
     person.addFriend("Paul")
     person.addFriend("George")
     person.addFriend("Ringo")
 
-    println(person.getFriends)
+    println(person.getFriends())
     println(person.getAge)
     println(person.getName)
+
+    person.removeFriend("George")
+
+    println(person.getFriends())
 }
 
 
 
-class Person (name: String, age: Int, var friends: List[String]) {
+class Person (name: String, age: Int) {
+
+    private val friendsList = new Friend()
 
     def addFriend(name: String): Unit = {
-        friends = friends :+ "name"
+        friendsList.addFriend(name)
     }
 
-    def getFriends: List[String] = {
-        friends
+    def removeFriend(name: String): Unit = {
+        friendsList.removeFriend(name)
+    }
+
+    def getFriends(): List[String] = {
+        friendsList.getFriends()
     }
 
     def getAge: Int = {
@@ -54,6 +64,25 @@ class Person (name: String, age: Int, var friends: List[String]) {
 
     def getName: String = {
         name
+    }
+}
+
+class Friend {
+
+    private var friends: List[String] = List()
+
+    def addFriend(name: String): Unit = {
+        if (!friends.contains(name)) {
+            friends = friends :+ name
+        }
+    }
+
+    def removeFriend(name: String): Unit = {
+        friends = friends.filter(_ != name)
+    }
+
+    def getFriends(): List[String] = {
+        friends
     }
 }
 
